@@ -10,7 +10,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     const args = [INITIAL_SUPPLY]
     const ourToken = await deploy("OurToken", {
         from: deployer,
-        args,
+        args: args,
         log: true,
         waitConfirmations: network.config.blockConfirmation || 1,
     })

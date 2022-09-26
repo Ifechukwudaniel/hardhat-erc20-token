@@ -19,41 +19,26 @@ const POLYGON_MAINNET_RPC_URL =
 const GOERLI_RPC_URL =
     process.env.GOERLI_RPC_URL || "https://eth-goerli.alchemyapi.io/v2/your-api-key"
 const PRIVATE_KEY = process.env.PRIVATE_KEY
-// optional
-const MNEMONIC = process.env.MNEMONIC || "Your mnemonic"
-const FORKING_BLOCK_NUMBER = process.env.FORKING_BLOCK_NUMBER
 
 // Your API key for Etherscan, obtain one at https://etherscan.io/
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "Your etherscan API key"
-const POLYGONSCAN_API_KEY = process.env.POLYGONSCAN_API_KEY || "Your polygonscan API key"
 const REPORT_GAS = process.env.REPORT_GAS || false
 
 module.exports = {
     defaultNetwork: "hardhat",
     networks: {
         hardhat: {
-            hardfork: "merge",
-            // If you want to do some forking set `enabled` to true
-            forking: {
-                url: MAINNET_RPC_URL,
-                blockNumber: FORKING_BLOCK_NUMBER,
-                enabled: false,
-            },
             chainId: 31337,
-        },
-        localhost: {
-            chainId: 31337,
+            blockConfirmations: 1,
         },
         goerli: {
             url: GOERLI_RPC_URL,
             accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
-            saveDeployments: true,
             chainId: 5,
         },
     },
     etherscan: {
         apiKey: {
-            polygon: POLYGONSCAN_API_KEY,
             goerli: ETHERSCAN_API_KEY,
         },
     },
